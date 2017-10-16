@@ -314,7 +314,20 @@ def get_haiku_lengths():
         length = len(raw)
         haiku_lengths.append([file, length])  
     return haiku_lengths
-		
+
+def documents_per_word(corpus):
+    word_counts = {}                 #initialize the dictionary
+    for text in corpus:             #iterate through all text vectors
+        #already_seen = []            #keep track of words you've seen already in document, so they aren't counted twice
+        for word in text[1][0]:     #iterate through each word
+            #if not word in already_seen:
+            if not word in word_counts.keys():
+               word_counts[word] = 1
+            else:
+               word_counts[word] += 1
+        #already_seen.append(word)
+    return word_counts
+
 #call this function when building corpus to reduce words in feature-set
 def reduce_word_features(corpus, doc_terms, min_df):
     for text in corpus: 
